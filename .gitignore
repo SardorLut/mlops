@@ -127,4 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+#Pycharm cache
 .idea
+*.pt
+*.jpg
+_DS_Store
+*.ipynb
