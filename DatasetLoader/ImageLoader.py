@@ -4,7 +4,7 @@ from torch.utils.data import Dataset
 
 class ImageLoader(Dataset):
     def __init__(self, dataset, transform=None):
-        self.dataset = self.checkChannel(dataset)  # check only RGB
+        self.dataset = self._checkChannel(dataset)  # check only RGB
         self.transform = transform
 
     def __len__(self):
@@ -17,9 +17,13 @@ class ImageLoader(Dataset):
             image = self.transform(image)
         return image, classCategory
 
-    def checkChannel(self, dataset):
+    def _checkChannel(self, dataset):
         datasetRGB = []
         for index in range(len(dataset)):
-            if (Image.open(dataset[index][0]).getbands() == ("R", "G", "B")):  # Check Channels
+            if Image.open(dataset[index][0]).getbands() == (
+                "R",
+                "G",
+                "B",
+            ):  # Check Channels
                 datasetRGB.append(dataset[index])
         return datasetRGB
